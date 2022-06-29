@@ -1,10 +1,8 @@
 var formElement = $('form');
 var formBtn = $('#formBtn');
 
-console.log(formElement);
-console.log(formBtn);
-
-
+// console.log(formElement);
+// console.log(formBtn);
 
 // Make a separate function outside to keep the code clean
 function submitPikachuInfo(event) {
@@ -25,6 +23,7 @@ function submitPikachuInfo(event) {
     // Let's make an external function!
     // localStorage.setItem("pikachuObject", JSON.stringify(pikachuObject));
     setLocalStorage(pikachuObject);
+    getInfoFromLocalStorageAndDisplayInfoToScreen();
 }
 
 function setLocalStorage(receivePikachuObject) {
@@ -32,9 +31,20 @@ function setLocalStorage(receivePikachuObject) {
     localStorage.setItem("pikachuObject", JSON.stringify(receivePikachuObject));
 }
 
-function getInfoFromLocalStorage() {
-    localStorage.getItem('')
+function getInfoFromLocalStorageAndDisplayInfoToScreen() {
+    var extractedData = JSON.parse(localStorage.getItem('pikachuObject'));
+    console.log(extractedData);
+    var newCard = $("<div>");
+    var newCard2 = $("<div>");
+    newCard.addClass("text-start col-4");
+    newCard2.addClass('text-end col-4');
+    newCard.text(extractedData.pikachuType);
+    newCard2.text(extractedData.pikachuDetails)
+    $("#pikachuDisplay").append(newCard);
+    $("#pikachuDisplay").append(newCard2);
 }
+
+getInfoFromLocalStorageAndDisplayInfoToScreen();
 
 
 // When using a form, you need to target the PARENT form itself, NOT the form button. 
